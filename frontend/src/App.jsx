@@ -2,7 +2,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Route, Routes } from "react-router-dom";
 import Register from "./register/Register";
-import Login from './login/login';
+import Login from './login/Login';
 import Home from './home/Home';
 import { VerifyUser } from './utils/VerifyUser';
 
