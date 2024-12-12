@@ -6,7 +6,7 @@ import { IoArrowBackSharp, IoSend } from "react-icons/io5";
 import axios from "axios";
 import { useSocketContext } from "../../context/SocketContext.jsx";
 import notify from "../../assets/sound/friendsound.mp3";
-import "./MessageContainer.css";
+import "./mycss/MessageContainer.css";
 
 const MessageContainer = ({ onUserBack }) => {
   const {

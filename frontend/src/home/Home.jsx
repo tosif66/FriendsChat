@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MessageContainer from "./components/MessageContainer";
 import Sidebar from "./components/Sidebar";
-import "./Home.css";
+import "./mycss/Home.css";
 
 const Home = () => {
   const [selectedUser, setSelectedUser] = useState(null);
