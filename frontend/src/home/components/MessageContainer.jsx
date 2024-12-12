@@ -6,6 +6,7 @@ import { IoArrowBackSharp, IoSend } from "react-icons/io5";
 import axios from "axios";
 import { useSocketContext } from "../../context/SocketContext.jsx";
 import notify from "../../assets/sound/friendsound.mp3";
+import "./MessageContainer.css";
 
 const MessageContainer = ({ onUserBack }) => {
   const {
@@ -94,112 +95,131 @@ const MessageContainer = ({ onUserBack }) => {
   };
 
   return (
-    <div className="md:min-w-[450px] h-[99%] flex flex-col py-2">
+    <div className="message-container">
+      {" "}
       {selectedConversation === null ? (
-        <div className="flex items-center justify-center w-full h-full">
-          <div className="px-4 text-center text-2xl text-gray-950 font-semibold flex flex-col items-center gap-2">
-            <p className="text-2xl ">Welcome!!👋 {authUser.username}😎</p>
-            <p className="text-lg"> Select a chat to start messaging.</p>
-            <TiMessages className="text-6xl text-center" />
-          </div>
+        <div className="no-conversation">
+          {" "}
+          <div className="welcome-message">
+            {" "}
+            <p className="welcome-text">
+              Welcome!!👋 {authUser.username}😎
+            </p>{" "}
+            <p className="start-chat-text">
+              {" "}
+              Select a chat to start messaging.
+            </p>{" "}
+            <TiMessages className="welcome-icon" />{" "}
+          </div>{" "}
         </div>
       ) : (
         <>
-          <div className="flex justify-between gap-1 bg-sky-600 md:px-2 rounded-lg h-10 md:h-12">
-            <div className="flex gap-2 md:justify-between items-center w-full">
-              <div className="md:hidden ml-1 self-center">
+          {" "}
+          <div className="message-header">
+            {" "}
+            <div className="header-content">
+              {" "}
+              <div className="back-button-wrapper">
+                {" "}
                 <button
                   onClick={() => onUserBack(true)}
-                  className="bg-white rounded-full px-2 py-1 self-center"
+                  className="back-button"
                 >
-                  <IoArrowBackSharp size={25} />
-                </button>
-              </div>
-              <div className="flex justify-between mr-2 gap-2">
-                <div className="self-center">
-                  <img
-                    className="rounded-full w-6 h-6 md:w-10 md:h-10 cursor-pointer"
-                    src={selectedConversation?.profilepic}
-                    alt="profile pic"
-                  />
-                </div>
-                <span className="text-gray-950 self-center text-sm md:text-xl font-bold">
-                  {selectedConversation?.username}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1 overflow-auto">
+                  {" "}
+                  <IoArrowBackSharp size={25} />{" "}
+                </button>{" "}
+              </div>{" "}
+              <div className="conversation-info">
+                {" "}
+                <img
+                  className="profile-pic"
+                  src={selectedConversation?.profilepic}
+                  alt="profile pic"
+                />{" "}
+                <span className="username">
+                  {" "}
+                  {selectedConversation?.username}{" "}
+                </span>{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>{" "}
+          <div className="message-list">
+            {" "}
             {loading && (
-              <div className="flex w-full h-full flex-col items-center justify-center gap-4 bg-transparent">
-                <div className="loading loading-spinner"></div>
+              <div className="loading-container">
+                {" "}
+                <div className="loading-spinner"></div>{" "}
               </div>
-            )}
+            )}{" "}
             {!loading && messages?.length === 0 && (
-              <p className="text-center text-black items-center">
-                Send a message to Start Coversation
+              <p className="no-messages-text">
+                Send a message to start conversation
               </p>
-            )}
+            )}{" "}
             {!loading &&
               messages?.length > 0 &&
               messages?.map((message) => (
                 <div
-                  className="text-white "
+                  className="message-item"
                   key={message?._id}
                   ref={lastMessageRef}
                 >
+                  {" "}
                   <div
-                    className={`chat ${
+                    className={`chat-message ${
                       message.senderId === authUser._id
                         ? "chat-end"
                         : "chat-start"
                     }`}
                   >
-                    <div className="chat-image avatar"></div>
+                    {" "}
+                    <div className="chat-avatar"></div>{" "}
                     <div
                       className={`chat-bubble ${
                         message.senderId === authUser?._id
-                          ? "bg-sky-600"
-                          : "chat-start"
+                          ? "chat-bubble-end"
+                          : "chat-bubble-start"
                       }`}
                     >
-                      {message?.message}
-                    </div>
-                    <div className="chat-footer text-[10px] opacity-80 ">
+                      {" "}
+                      {message?.message}{" "}
+                    </div>{" "}
+                    <div className="message-timestamp">
+                      {" "}
                       {new Date(message?.createdAt).toLocaleDateString(
                         "en-IN",
                         { hour: "numeric", minute: "numeric" }
-                      )}
-                    </div>
-                  </div>
+                      )}{" "}
+                    </div>{" "}
+                  </div>{" "}
                 </div>
-              ))}
-          </div>
-          <form onSubmit={handleSubmit} className="rounded-full text-black">
-            <div className="w-full rounded-full flex items-center bg-white">
+              ))}{" "}
+          </div>{" "}
+          <form onSubmit={handleSubmit} className="message-input-form">
+            {" "}
+            <div className="message-input-container">
+              {" "}
               <input
                 value={sendData}
                 onChange={handleMessage}
                 required
                 id="message"
                 type="text"
-                className="w-full bg-transparent outline-none px-4 rounded-full"
-              />
-              <button type="submit">
+                className="message-input"
+                placeholder="Type a message..."
+              />{" "}
+              <button type="submit" className="send-button">
+                {" "}
                 {sending ? (
-                  <div className="loading loading-spinner"></div>
+                  <div className="loading-spinner"></div>
                 ) : (
-                  <IoSend
-                    size={20}
-                    className="text-sky-700 cursor-pointer rounded-full w-10 h-auto p-1"
-                  />
-                )}
-              </button>
-            </div>
-          </form>
-          {/* <audio ref={soundRef} src={notify} /> */}
+                  <IoSend size={20} />
+                )}{" "}
+              </button>{" "}
+            </div>{" "}
+          </form>{" "}
         </>
-      )}
+      )}{" "}
     </div>
   );
 };

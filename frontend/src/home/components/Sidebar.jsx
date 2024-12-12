@@ -8,6 +8,7 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
 import userConversation from "../../Zustand/userConversation.js";
 import { useSocketContext } from "../../context/SocketContext";
+import "./Sidebar.css";
 
 const Sidebar = ({ onSelectUser }) => {
   const navigate = useNavigate();
@@ -126,139 +127,120 @@ const Sidebar = ({ onSelectUser }) => {
   };
 
   return (
-    <div className="h-full w-auto px-1 overflow-y-auto">
-      <div className="flex justify-between gap-2">
-        <form
-          onSubmit={handleSearchSubmit}
-          className="w-auto flex items-center justify-between bg-white rounded-full"
-        >
+    <div className="sidebar-container">
+      <div className="sidebar-header">
+        <form onSubmit={handleSearchSubmit} className="sidebar-search">
           <input
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             type="text"
-            className="px-4 w-auto bg-transparent outline-none rounded-full"
+            className="sidebar-search-input"
             placeholder="search user"
           />
-          <button className="btn btn-circle bg-sky-700 hover:bg-gray-950">
+          <button className="sidebar-search-button">
             <FaSearch />
           </button>
         </form>
         <img
           onClick={() => navigate(`/profile/${authUser?._id}`)}
           src={authUser?.profilepic}
-          className="self-center h-12 w-12 hover:scale-110 cursor-pointer"
+          className="profile-pic"
         />
       </div>
-      <div className="divider px-3"></div>
+      <div className="divider"></div>
       {searchUser?.length > 0 ? (
         <>
-          <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar">
-            <div className="w-auto">
+          {" "}
+          <div className="sidebar-user-list">
+            <div className="user-list-wrapper">
+              {" "}
               {searchUser.map((user, index) => (
                 <div key={user._id}>
+                  {" "}
                   <div
                     onClick={() => handleUserClick(user)}
-                    className={`flex gap-3 
-                                                items-center rounded 
-                                                p-2 py-1 cursor-pointer
-                                                ${
-                                                  selectedUserId === user?._id
-                                                    ? "bg-sky-500"
-                                                    : ""
-                                                }`}
+                    className={`user-item ${
+                      selectedUserId === user?._id ? "selected" : ""
+                    }`}
                   >
                     <div
                       className={`avatar ${isOnline[index] ? "online" : ""}`}
                     >
-                      <div className="w-12 rounded-full">
+                      <div className="avatar-img">
+                        {" "}
                         <img src={user.profilepic} alt="user.img" />
                       </div>
                     </div>
-                    <div className="flex flex-col flex-1">
-                      <p className="font-bold text-gray-950">{user.username}</p>
+                    <div className="user-details">
+                      {" "}
+                      <p className="user-name">{user.username}</p>
                     </div>
                   </div>
-                  <div className="divider divide-solid px-3 h-[1px]"></div>
+                  <div className="divider"></div>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="mt-auto px-1 py-1 flex">
-            <button
-              onClick={handleSearchback}
-              className="bg-white rounded-full px-2 py-1 self-center"
-            >
-              <IoArrowBackSharp size={25} />
-            </button>
-          </div>
+          </div>{" "}
+          <div className="back-button-container">
+            <button onClick={handleSearchback} className="back-button">
+              {" "}
+              <IoArrowBackSharp size={25} />{" "}
+            </button>{" "}
+          </div>{" "}
         </>
       ) : (
         <>
-          <div className="min-h-[70%] max-h-[80%] m overflow-y-auto scrollbar">
-            <div className="w-auto">
+          {" "}
+          <div className="sidebar-user-list">
+            {" "}
+            <div className="user-list-wrapper">
               {chatUser.length === 0 ? (
-                <>
-                  <div className="font-bold items-center flex flex-col text-xl text-yellow-500">
-                    <h1>Why are you Alone!!🤔</h1>
-                    <h1>Search username to chat</h1>
-                  </div>
-                </>
+                <div className="no-chat-users">
+                  <h1>Why are you Alone!!🤔</h1>
+                  <h1>Search username to chat</h1>
+                </div>
               ) : (
-                <>
-                  {chatUser.map((user, index) => (
-                    <div key={user._id}>
+                chatUser.map((user, index) => (
+                  <div key={user._id}>
+                    <div
+                      onClick={() => handleUserClick(user)}
+                      className={`user-item ${
+                        selectedUserId === user?._id ? "selected" : ""
+                      }`}
+                    >
                       <div
-                        onClick={() => handleUserClick(user)}
-                        className={`flex gap-3 
-                                                items-center rounded 
-                                                p-2 py-1 cursor-pointer
-                                                ${
-                                                  selectedUserId === user?._id
-                                                    ? "bg-sky-500"
-                                                    : ""
-                                                }`}
+                        className={`avatar ${isOnline[index] ? "online" : ""}`}
                       >
-                        <div
-                          className={`avatar ${
-                            isOnline[index] ? "online" : ""
-                          }`}
-                        >
-                          <div className="w-12 rounded-full">
-                            <img src={user.profilepic} alt="user.img" />
-                          </div>
-                        </div>
-                        <div className="flex flex-col flex-1">
-                          <p className="font-bold text-gray-950">
-                            {user.username}
-                          </p>
-                        </div>
-                        <div>
-                          {newMessageUsers.receiverId === authUser._id &&
-                          newMessageUsers.senderId === user._id ? (
-                            <div className="rounded-full bg-green-700 text-sm text-white px-[4px]">
-                              +1
-                            </div>
-                          ) : (
-                            <></>
-                          )}
+                        <div className="avatar-img">
+                          {" "}
+                          <img src={user.profilepic} alt="user.img" />
                         </div>
                       </div>
-                      <div className="divider divide-solid px-3 h-[1px]"></div>
-                    </div>
-                  ))}
-                </>
+                      <div className="user-details">
+                        {" "}
+                        <p className="user-name">{user.username}</p>
+                      </div>
+                      <div>
+                        {" "}
+                        {newMessageUsers.receiverId === authUser._id &&
+                          newMessageUsers.senderId === user._id && (
+                            <div className="new-message-indicator"> +1 </div>
+                          )}{" "}
+                      </div>{" "}
+                    </div>{" "}
+                    <div className="divider"></div>{" "}
+                  </div>
+                ))
               )}
             </div>
           </div>
-          <div className="mt-auto px-1 py-1 flex">
-            <button
-              onClick={handleLogOut}
-              className="hover:bg-red-600  w-10 cursor-pointer hover:text-white rounded-lg"
-            >
+          <div className="logout-button-container">
+            <button onClick={handleLogOut} className="logout-button">
+              {" "}
               <BiLogOut size={25} />
-            </button>
-            <p className="text-sm py-1">Logout</p>
-          </div>
+            </button>{" "}
+            <p className="logout-text">Logout</p>{" "}
+          </div>{" "}
         </>
       )}
     </div>
