@@ -95,7 +95,7 @@ const MessageContainer = ({ onUserBack }) => {
   };
 
   return (
-    <div className="min-w-full md:min-w-[50%] h-auto md:h-[99%] flex flex-col py-2 px-4 sm:px-6 md:px-8">
+    <div className="min-w-full md:min-w-[80%] h-auto md:h-[99%] flex flex-col py-2 px-4 sm:px-6 md:px-8">
       {selectedConversation === null ? (
         <div className="flex items-center justify-center w-full h-full">
         
