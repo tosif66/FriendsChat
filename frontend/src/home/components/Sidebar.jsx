@@ -128,7 +128,7 @@ const Sidebar = ({ onSelectUser }) => {
 
   return (
     <div className="h-full w-auto px-1">
-      <div className="flex justify-between gap-2">
+      <div className="flex items-center flex-wrap p-2">
         <form onSubmit={handleSearchSubmit} className="w-auto flex items-center justify-between bg-white rounded-full">
           <input
             value={searchInput}
