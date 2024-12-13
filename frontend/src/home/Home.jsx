@@ -33,7 +33,7 @@ const Home = () => {
         } ${selectedUser ? "block" : "hidden"}`}
       ></div>
       <div
-        className={`flex-auto ${selectedUser ? "" : "hidden md:flex"} bg-gray-200 `}
+        className={`flex-auto ${selectedUser ? "" : "hidden md:flex"} `}
       >
         <MessageContainer onUserBack={handleShowSidebar} />
       </div>
