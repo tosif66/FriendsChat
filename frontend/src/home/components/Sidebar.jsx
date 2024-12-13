@@ -8,7 +8,7 @@ import { IoArrowBackSharp } from "react-icons/io5";
 import { BiLogOut } from "react-icons/bi";
 import userConversation from "../../Zustand/userConversation.js";
 import { useSocketContext } from "../../context/SocketContext";
-import "../mycss/Sidebar.css";
+import "../components/MessageContainer.css";
 
 const Sidebar = ({ onSelectUser }) => {
   const navigate = useNavigate();
