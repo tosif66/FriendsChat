@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MessageContainer from "./components/MessageContainer";
 import Sidebar from "./components/Sidebar";
-import "../home/Home.css";
+
 
 const Home = () => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -17,8 +17,14 @@ const Home = () => {
   };
 
   return (
-    <div className="home-container">
-      <div className={`sidebar-container${isSidebarVisible ? "" : "hidden"}`}>
+    <div className='flex justify-between min-w-full
+      md:min-w-[550px] md:max-w-[65%]
+      px-2 h-[95%] md:h-full  
+      rounded-xl shadow-lg
+      bg-gray-400 bg-clip-padding
+      backdrop-filter backdrop-blur-lg 
+      bg-opacity-0'>
+      <div className={`w-full py-2 md:flex ${isSidebarVisible ? "" : "hidden"}`}>
         <Sidebar onSelectUser={handleUserSelect} />
       </div>
       <div
@@ -27,7 +33,7 @@ const Home = () => {
         } ${selectedUser ? "block" : "hidden"}`}
       ></div>
       <div
-        className={`message-container${selectedUser ? "" : "hidden md:flex"} `}
+        className={`flex-auto ${selectedUser ? "" : "hidden md:flex"} bg-gray-200 `}
       >
         <MessageContainer onUserBack={handleShowSidebar} />
       </div>
