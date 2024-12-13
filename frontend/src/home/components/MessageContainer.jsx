@@ -202,7 +202,7 @@ const MessageContainer = ({ onUserBack }) => {
                 className="w-full bg-transparent outline-none px-4 rounded-full"
                 placeholder="Type a message..."
               />
-              <button type="submit" className="text-sky-700 cursor-pointer rounded-full bg-gray-800 w-10 h-auto p-1">
+              <button type="submit" className="text-sky-700 cursor-pointer rounded-full w-10 h-auto p-1">
                 {sending ? (
                   <div className=" loading loading-spinner"></div>
                 ) : (
