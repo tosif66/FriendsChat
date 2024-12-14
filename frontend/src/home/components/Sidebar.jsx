@@ -224,7 +224,7 @@ const Sidebar = ({ onSelectUser }) => {
                         
                         {newMessageUsers.receiverId === authUser._id &&
                           newMessageUsers.senderId === user._id && (
-                            <div className="rounded-full bg-green-700 text-sm text-white px-[4px]"> +1 </div>
+                            <div className="rounded-full bg-green-700 text-sm text-white px-[4px] items-end "> +1 </div>
                           )}
                       </div>
                     </div>
