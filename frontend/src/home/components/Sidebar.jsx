@@ -144,7 +144,7 @@ const Sidebar = ({ onSelectUser }) => {
         <img
           onClick={() => navigate(`/profile/${authUser?._id}`)}
           src={authUser?.profilepic}
-          className="self-center h-12 w-10 rounded-full hover:scale-110 cursor-pointer"
+          className="self-center h-12 w-10 rounded-full hover:scale-110 cursor-pointer flex-wrap"
         />
       </div>
       <div className="divider px-3"></div>
