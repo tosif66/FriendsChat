@@ -8,7 +8,7 @@ const jwtToken = (userId,res) =>{
         maxAge: 30*24*60*1000,
         httpOnly:true,
         sameSite:"strict",
-        secure:true
+        secure: process.env.NODE_ENV !== "development"
     })
 }
 
